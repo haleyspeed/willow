@@ -16,3 +16,7 @@ Collection of python scripts to export and analyze HDF5 files from the Leaf Labs
   * Scale factor for conversion of raw data to microvolts (0.195 according to Leaf Labs hdf52dat.m script)
 * Probe geometry will vary between manufacturers and the number of probes/shanks/channels used
   * May need multiple probe geometries depending on the experimental setup
+
+### Running Mountainsort
+See users.flatironinstitute.org/~magland/docs/mountainsort
+And https://github.com/flatironinstitute/mountainsort_examples/blob/master/README.md
