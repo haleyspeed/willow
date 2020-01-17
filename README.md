@@ -18,5 +18,5 @@ Collection of python scripts to export and analyze HDF5 files from the Leaf Labs
   * May need multiple probe geometries depending on the experimental setup
 
 ### Running Mountainsort
-See users.flatironinstitute.org/~magland/docs/mountainsort
-And https://github.com/flatironinstitute/mountainsort_examples/blob/master/README.md
+* See https://users.flatironinstitute.org/~magland/docs/mountainsort
+* And https://github.com/flatironinstitute/mountainsort_examples/blob/master/README.md
