@@ -16,14 +16,14 @@ Collection of python scripts to export and analyze HDF5 files from the Leaf Labs
   * Scale factor for conversion of raw data to microvolts (0.195 according to Leaf Labs hdf52dat.m script)
 * Probe geometry will vary between manufacturers and the number of probes/shanks/channels used
   * May need multiple probe geometries depending on the experimental setup
-  * Had to manually create a package called "mlpy" in the Anaconda3\envs\h5test\Lib\site-packages using the files (mdaio.py) in https://github.com/flatironinstitute/mountainsort/tree/master/packages/pyms/mlpy
+* Had to manually create a package called "mlpy" in the Anaconda3\envs\h5test\Lib\site-packages using the files (mdaio.py) in https://github.com/flatironinstitute/mountainsort/tree/master/packages/pyms/mlpy
 
 ### Running Mountainsort
 * Runs best on linux. Can run on Mac. Use conda environments to avoid installation errors
 * See https://users.flatironinstitute.org/~magland/docs/mountainsort
 * And https://github.com/flatironinstitute/mountainsort_examples/blob/master/README.md
 * Conda installation instructions did not work for me as written, but this did:
- * conda install -c flatiron mountainlab 
+	* conda install -c flatiron mountainlab 
 	* conda install -c flatiron mountainlabmountainlab_pytools 
 	* conda install -c flatiron mountainlabml_ephys 
 	* conda install -c flatiron mountainlabml_ms3 
