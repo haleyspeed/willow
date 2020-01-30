@@ -32,8 +32,11 @@ out = np.array(ch)
 rows = out.shape[0]
 cols = out.shape[1]
 
-# Use 32bit save function or you will get misshapen waveforms (like saturated gain)
-mdaio.writemda32(out,'newfile_16bit_integer.mda')
+# 16-bit save function
+mdaio.mdaio.writemda16i(out,'raw.mda')
+
+# 32bit save function 
+mdaio.writemda32(out,'raw32.mda')
 
 # Plot the first 500 datapoints from ch0
 fig, ax = plt.subplots(figsize=(3, 4), frameon = False, dpi = 100)
