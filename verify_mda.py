@@ -16,7 +16,7 @@ print ('rows: ' + str(rows))
 print ('columns: ' + str(columns))
 print ('size: ' + str(d.size))
 
-# Plot the first 500 datapoints from ch0
+# Plot the first 20000 datapoints from channel 500
 channel = 500 # chip number/sample_id
 x_start = -100
 x_end = 20000
