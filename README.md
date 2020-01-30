@@ -14,7 +14,7 @@ _**params.json**_ --> Contains configuration information for Mountainsort (sampl
 
 _**mountainsort.py**_ --> The main file to configure and run Mountainsort4
 
-_**mountainlab4.py**_ --> Edited from original mountainsort package. Replace the file in `site_packages/spikesorters/mountainsort4/`
+_**mountainsort4.py**_ --> Edited from original mountainsort package. Replace the file in `site_packages/spikesorters/mountainsort4/`
 
 _**basesorter.py**_ --> Edited from original mountainsort package. Replace the file in ` /site_packages/spikesorters/`
 
@@ -34,7 +34,7 @@ Mountainsort4 is still under development, especially as it relates to the spikei
   * sorter_name is blank but later a function calls to see if it is installed, which raises a flag. Also, the "installed" variable is also set to "False" as default, which automatically halts the script. I changed this to True and ignore the sorter_name altogether because we manually specify the sorter in our script.
   * To initialize an instance of the basesorter class: basesorter = ss.BaseSorter(recording = recording, output_folder = din)
   * If you want to change the default parameters of the basesorter, like the spike detect sign from -1 to 0, then access it as: basesorter.detect_sign = 0. In real life, if you do this, make sure the change in detect sign is also reflected in your params.json file.
-* in mountainlab4.py file, the __init__.py was not set to accept the new basesorter class, but rather the old kwargs. However, the __init__ function still calls an instance of the basesorter class. to overcome this, I changed the "__ init__(self, ** kwargs):" to "__ init__(self, BaseSorter, ** kwargs):" 
+* in mountainsort4.py file, the __init__.py was not set to accept the new basesorter class, but rather the old kwargs. However, the __init__ function still calls an instance of the basesorter class. to overcome this, I changed the "__ init__(self, ** kwargs):" to "__ init__(self, BaseSorter, ** kwargs):" 
 * Error: 'MdaSortingExtractor' has no attribute "writeSorting" --> error was traced back to the spikeextractor package 
   * Added an import statement to correct this in _**mountainsort.py**_
   
