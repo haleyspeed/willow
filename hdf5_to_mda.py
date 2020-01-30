@@ -11,15 +11,6 @@ import os
 from mlpy import mdaio
 import matplotlib.pyplot as plt
 
-# Function Definitions
-def save_csv (df_out, file_out, dir_out):
-    try:
-        os.stat(dir_out)
-    except:
-        os.makedirs(dir_out)
-    # Write data to file
-    os.chdir(dir_out)
-    df_out.to_csv(file_out)
 
 # File Functions
 fin = '2020_01_08.h5'
