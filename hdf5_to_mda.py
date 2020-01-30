@@ -33,10 +33,10 @@ rows = out.shape[0]
 cols = out.shape[1]
 
 # 16-bit save function
-mdaio.mdaio.writemda16i(out,'raw.mda')
+# mdaio.mdaio.writemda16i(out,'raw16.mda')
 
 # 32bit save function 
-mdaio.writemda32(out,'raw32.mda')
+mdaio.writemda32(out,'raw.mda')
 
 # Plot the first 500 datapoints from ch0
 fig, ax = plt.subplots(figsize=(3, 4), frameon = False, dpi = 100)
