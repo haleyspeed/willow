@@ -1,7 +1,9 @@
 # User guide for Leaf Labs Willow System
 
 ## Rationale
-Ultra-high density recordings from the Willow system must be scaled, filtered, and transformed before analysis in spike sorting scripts like Mountainsort or Kilosort. This collection of Jupyter notebooks does all of this plus modules for subtracting baseline probe noise from experimental data and reformatting scripts for use with Kilosort or Mountainsort. All except Mountainsort or Kilosort themselves can be run on Mac OS, as well as Ubuntu linux. The scripts have been optimized to run on high-end laptops instead of HPCs or workstations for greater flexibility.
+Ultra-high density recordings from the Willow system must be scaled, filtered, and transformed before analysis in spike sorting scripts like Mountainsort or Kilosort. This collection of Jupyter notebooks does all of this plus has modules for subtracting baseline probe noise from experimental data and reformatting scripts for use with Mountainsort.You can also make long traces of individual channels or make short traces from an entire shank that represent the probe geometry.
+
+The scripts have been optimized to run on high-end laptops running MacOS or Ubuntu Linux (instead of HPCs or workstations) for greater flexibility. 
 
 ## System requirements:
  - 1TB HD
@@ -193,7 +195,7 @@ Mountainsort is an alternative to Kilosort for spike-sorting ultra-high-density 
  - (leaf_conda) $ `conda install ipykernel`
 
 ## Running mountainsort.ipynb
-- Copy `mountainsort.ipynb` to the experiment directory
+- Copy `ms4_example.ipynb` to the experiment directory
 - Copy the `sorterfiles` folder (https://www.dropbox.com/sh/b23my6oonlw41y4/AAB4QojtxpJmplHOZ46Sm30ta?dl=0) into the experiment folder as a subfolder
 - Make another subfolder in your experiment's directory named `dataset`
   - Add your `raw.mda`, `geom.csv`, and `params.json` files to the `dataset` folder
@@ -203,6 +205,7 @@ Mountainsort is an alternative to Kilosort for spike-sorting ultra-high-density 
  - Run each box in turn, pay attention to the pipeline status to make sure it's still Running
  - If it runs with no errors, delete any files in the `dataset` subfolder, copy over your `raw.mda`, `geom.csv`, and `params.json` files to the dataset folder, clear the kernal and retart the script (shut it down if you have to then reopen).
  - If you get an error regarding `firings_true.mda` does not exist, or something to that effect, no events were found.
+ ### Note: Currently Mountainsort stalls on the "whiten" step and throws an error. The developers have been contacted regarding the error.
 
 
 # Appendix
