@@ -278,6 +278,21 @@ Mountainsort is an alternative to Kilosort for spike-sorting ultra-high-density 
 - Copy the `mlpy` folder from the github or dropbox into the `leaf_env/lib/Python3.7/site_packages folder `
 
 
+## Setting up a new Windows10 machine to run analysis programs
+- Download and install python 3.7 (the latest version at the time of writing) from Python.org. Any future versions may not support these scripts.
+- Open the command prompt (cmd.exe) and navigate to a new directory just for this project:
+  - `C:\Users\Haley> mkdir leaf`
+ - Navigate to the new folder:
+  - `C:\Users\Haley> cd leaf`
+ - Install virtual environments
+  - `C:\Users\Haley\leaf> pip install virtualenv`
+- Create a new environment just for the leaf project (leaf_env)
+  - `C:\Users\Haley\leaf> python -m venv C:\Users\Haley\leaf\leaf_env`
+- Activate the leaf_env
+  - `C:\Users\Haley\leaf> leaf_env\Scripts\Activate.bat`
+- From here, you can install all of the same packages as listed for the MacOS and Ubuntu setup. Instead of `Python3 -m pip install....` you'll type `pip install matplotlib` etc or `python -m pip install matplotlib`
+- Everything else should be the same (ipykernel install etc..)
+
 ## Troubleshooting
 - Error: 'Matplotlib is currently using agg, which is a non-GUI backend, so cannot show the figure.plt.show()'
  - Install "tk" - the graphical user interface bits of python
