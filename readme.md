@@ -279,7 +279,7 @@ Mountainsort is an alternative to Kilosort for spike-sorting ultra-high-density 
 
 
 ## Setting up a new Windows10 machine to run analysis programs
-- Download and install python 3.7 (the latest version at the time of writing) from Python.org. Any future versions may not support these scripts.
+- Download and install python 3.7 64 bit (the latest version at the time of writing) from Python.org. Any future versions may not support these scripts. And Make SURE it's the 64 bit version or it won't be able to handle these large files
 - Open the command prompt (cmd.exe) and navigate to a new directory just for this project:
   - `C:\Users\Haley> mkdir leaf`
  - Navigate to the new folder:
@@ -303,3 +303,8 @@ Mountainsort is an alternative to Kilosort for spike-sorting ultra-high-density 
    - $ python3 -m pip install spikeinterface
 - Exception: Incompatible dimensions between geom.csv and timeseries file 65 <> 63 (or similar)
  - Check that your input file to h5_to_mda.ipynb and output raw.mda and geom.csv all have the same number of channels. This is usually a list error (forgetting that in a list the last channel will not be inlcuded) or forgetting that python starts numbering at 0 rather than 1.
+- On windows if you get an error: "Unable to allocate ## MB for an array..."
+ - Make sure you have the 64 bit version of python installed. Control Panel --> Programs and Features --> Python 3.7 (64 bit)
+ - Otherwise, uninstall Python and start again with the 64 bit installer
+ - Do a system search for advanced system settings --> Advanced Tab --> Performance --> Advanced Tab --> Virtual Memory --> change --> uncheck "Automatically Manage  paging file size for all drives"
+ - On the relevant drive in the window, set the Custom size minimum to the recommended then up the maximum to 16000MB (assuming you have at least 4000 remaining out of the total). Save the changes and restart the computer.
