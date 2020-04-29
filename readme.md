@@ -16,17 +16,17 @@ Ultra-high density recordings from the Willow system must be scaled, filtered, a
  2. Open a new Terminal. Either click on the Terminal icon in the doc or click on the grid-like button on the dock and choose the "All" tab then the "Terminal" icon (or cmd.exe for Win10)
  3. Navigate to the parent folder of the leaf_env folder, activate the leaf_env kernel, then open jupyter notebook (see Appendix for more detail). This should open up your browser and show you the willow directory. Navigate it just like a normal file explorer window to find your experiment folder with the .h5 files.
  #### MacOS and Ubuntu
-     - $ cd willow/data/leaf_env
-     - $ source leaf_env/bin/Activate
-     - $ jupyter notebook
+     - $ `cd willow/data/leaf_env`
+     - $ `source leaf_env/bin/Activate`
+     - $ `jupyter notebook`
 
- #### Windows
-    - <C:\> cd willow/data/leaf_env
-    - <C:\> source leaf_env/bin/Activate
-    - <C:\> jupyter notebook
+  #### Windows
+  - `C:\> cd Users\Haley\Documents\leaf`
+  - `C:\> leaf_env\Scripts\Activate.bat`
+  - `C:\> jupyter notebooks --notebook-dir C:\Users\Haley\Documents`
 
 
-      *There should be one folder per experiment,
+      There should be one folder per experiment,
       even if that means multiple subdirectories.*
 
 4. For each ipynb file, the user should only have to change the filename and probe configuration variables in the first box (conveniently named "User Input").
@@ -43,6 +43,25 @@ Ultra-high density recordings from the Willow system must be scaled, filtered, a
   - Remember that lists are exclusive - the last number in a list is not included in the function.
   - Ranges in lists are defined by `[:]`. A number to the left of the colon means 'start here' and the numbers to the right mean 'stop here and don't include this one'
 
+## Recommended Workflow
+  1. Copy h5_explorer.ipynb into a new folder, along with the h5 data file "experiment_C2020... .h5".
+  2. Rename the h5_explorer.ipynb according to the experiment name to make it easy to find later: 'explorer_experiment_C2020.....Shank1.ipynb'
+  3. Change the variables in the "User Input" Section to reflect your current analysis
+   - `chan_num = [0,64]` for the first 64 channels (Shank1)
+   - `window = [0,300]` for a 5 minute recording
+   - Kernel -> Restart Kernel and Run All
+      - Tripped up a few times in testing with "Keyboard Interrupt" but there was no interruption. Best to run cell by cell or keep an eye on it in case it hangs in auto-run mode.
+      - if it stalls on a h5 input/output step, you will get a file open error on the next run. Just add the line `hf.close()` at the top of the box and that should close it before you reopen in later steps.
+  4. Close the notebook when you're done and in the jupyter tab (with the files listed) check the box next to the ipynb file and choose "shut down" from the little menu above (orangish). This will free up some memory.
+  5. Make a copy of the notebook and change the filename of the copy to "explorer_experiment_C2020.....Shank2.ipynb"
+    - `chan_num = [64-128]` for Shank2
+    - Kernel -> Restart Kernel and Run All (or manually run the boxes in order)
+  6. Repeat these steps as needed to cover the full length recording from all channels.
+  7. After the files have been filtered in explorer, load the filtered h5 files into h5_spikeviewer to tweak the threshold for spike detection on the different channels or to make figures. It analyzes just 1 second of data.
+  8. Once you know the correct threshold, change the user input in h5_spikedetector for full-length analysis.
+  9. Once you have finished analyzing each of these files, transfer them for storage or they will eat up disk space. In testing, a 2 min, 64 channel recording from the cerebellum with a threshold of 2 resulted in a 1.5GB events csv. That is a HUGE amount of data, so don't get too backlogged.
+
+
 ## Analysis Options
 Analysis will consist of 5 parts:
 1. `h5_probe.ipynb`
@@ -52,8 +71,8 @@ Analysis will consist of 5 parts:
 2. `h5_explorer.ipynb`
 > Necessary for all analysis. Scales raw data to microvolts. Band pass filters data at 450-5000 Hz and saves the filtered traces. Also useful to find an appropriate window (> 1 second) for clustering analysis in mountainsort or to make example figures of raw traces.
 
-3. `h5_spikedetector.ipynb`
-> Homegrown spike detector just for the Willow system using our own cerebellar recording data as the test input. Uses Savitzky-Golay (polynomial) smoothing to identify the baseline. Peaks are detected first by being above a moving average of the previous 1 second of the trace for each datapoint. The peak is kept if it is at least `threshold * SSD` of the smoothed mean and is the largest peak in the center of a 10s window. This prevents duplicate peak detection and ensures accurate peak detection. Peaks are aggregated and the inter-peak interval and peak width are calculated. Final output is a spreadsheet with each row corresponding to 1 peak.   
+3. `h5_spikedetector.ipynb \ 'h5_spikeviewer.ipynb`
+> Homegrown spike detector just for the Willow system using our own cerebellar recording data as the test input. Uses Savitzky-Golay (polynomial) smoothing to identify the baseline. Peaks are detected first by being above a moving average of the previous 1 second of the trace for each datapoint. The peak is kept if it is at least `threshold * SSD` of the smoothed mean and is the largest peak in the center of a 10s window. This prevents duplicate peak detection and ensures accurate peak detection. Peaks are aggregated and the inter-peak interval and peak width are calculated. Final output is a spreadsheet with each row corresponding to 1 peak. Spikeviewer analyzes a 1-second window from each channel for optimizing threshold and making figures/averaging traces. Spikedetector analyzes the entire region specifies and does not make figures (for speed).
 
 4. `h5_subtractor.ipynb` (optional)
 > Subtracts 1s trace from saline probe recording (analyzed in `h5_probe.ipynb`) from experimental trace. Painfully slow on the best computer and not recommended. If S/N is really bad, it can eat away at your signal and make it worse. Use with extreme caution.
@@ -135,7 +154,7 @@ Analysis will consist of 5 parts:
 
 - `filename_filtered_64.png` - same as for the unfiltered plot except with the bandpass filtered data.
 
-## Detect spikes using h5_spikedetector.ipynb
+## Detect spikes using h5_spikeviewer and h5_spikedetector.ipynb
 #### User Input
 - `datafile` - filtered experimental file from h5_explorer.ipynb
 - `basefile` - filtered probe file from h5_probe.ipynb
